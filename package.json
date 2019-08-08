@@ -1,0 +1,31 @@
+{
+  "name": "js13k19",
+  "version": "1.0.0",
+  "description": "Sample config for Js13K competition with Kontra + Webpack",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack", 
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawnest/js13k19.git"
+  },
+  "keywords": [
+    "js13k",
+    "kontra",
+    "webpack"
+  ],
+  "author": "Akos Herko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shawnest/js13k19/issues"
+  },
+  "homepage": "https://github.com/shawnest/js13k19#readme",
+  "devDependencies": {
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
