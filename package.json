@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack", 
+    "watch-size": "watch -n 30 npm run build",
+    "build": "webpack && cd dist && rm main.js && advzip -a game.zip $(ls) 2>&1 >/dev/null && rm index.html && ls -lh | awk '/game/' | awk '{print $5}'",
     "test": "test"
   },
   "repository": {
@@ -24,6 +25,12 @@
   },
   "homepage": "https://github.com/shawnest/js13k19#readme",
   "devDependencies": {
+    "advzip-bin": "^1.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "html-webpack-inline-source-plugin": "0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"

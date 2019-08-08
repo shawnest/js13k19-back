@@ -1,1 +1,3 @@
-console.log('Hello World!');
+import "./index.css";
+
+console.log('Hello');
