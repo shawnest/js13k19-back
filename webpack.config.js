@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   devServer: {
     port: 8080
   },
@@ -11,7 +11,6 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inlineSource: ".(js|css)$",
-      template: "src/index.html",
       minify: {
         removeAttributeQuotes: true,
         removeComments: true,
