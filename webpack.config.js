@@ -11,6 +11,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inlineSource: ".(js|css)$",
+      template: "src/index.html",
       minify: {
         removeAttributeQuotes: true,
         removeComments: true,
