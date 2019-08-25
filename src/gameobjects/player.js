@@ -1,5 +1,5 @@
 import kontra from "kontra";
-import { SCALE_RATIO } from "../configs/game-config";
+import { SCALE_RATIO, GYRO_SUPPORTED } from "../configs/game-config";
 import degreesToRadian from "../utilities/math";
 import BasicSprite from "./basic";
 
@@ -8,14 +8,38 @@ class Player extends BasicSprite {
     super(properties);
 
     this.setScale(SCALE_RATIO);
+    this.setControls();
+  }
+
+  setControls() {
+    this.controls = null;
+    if (GYRO_SUPPORTED) {
+      window.addEventListener(
+        "deviceorientation",
+        event => {
+          this.event = event;
+        },
+        true
+      );
+      this.controls = () => {
+        if (this.event) {
+          this.rotation = this.event.gamma;
+        }
+      };
+    } else {
+      this.controls = () => {
+        if (kontra.keyPressed("left")) {
+          this.rotation += -2;
+        }
+        if (kontra.keyPressed("right")) {
+          this.rotation += 2;
+        }
+      };
+    }
   }
 
   update() {
-    if (kontra.keyPressed("left")) {
-      this.rotation += -2;
-    } else if (kontra.keyPressed("right")) {
-      this.rotation += 2;
-    }
+    this.controls();
   }
 
   render() {

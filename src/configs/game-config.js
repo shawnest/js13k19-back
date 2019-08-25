@@ -5,6 +5,8 @@ export const DISPLAY = Object.freeze({
   DEFAULT_HEIGHT: 600
 });
 
+export const GYRO_SUPPORTED = window.DeviceOrientationEvent;
+
 export const SCALE_RATIO = Math.min(
   DISPLAY.WIDTH / DISPLAY.DEFAULT_WIDTH,
   DISPLAY.HEIGHT / DISPLAY.DEFAULT_HEIGHT

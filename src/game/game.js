@@ -1,8 +1,8 @@
 import { GameLoop, init } from "kontra";
-import ObjectFactory from "./object-factory";
-import InputManager from "./input-manager";
-import SceneManager from "./scene-manager";
 import EventManager from "./event-manager";
+import InputManager from "./input-manager";
+import ObjectFactory from "./object-factory";
+import SceneManager from "./scene-manager";
 
 class Game {
   constructor(config) {
