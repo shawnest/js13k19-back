@@ -4,9 +4,9 @@
   "description": "Sample config for Js13K competition with Kontra + Webpack",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --host 0.0.0.0",
     "watch-size": "watch -n 30 npm run build",
-    "build": "webpack && cd dist && rm main.js && advzip -a game.zip $(ls) 2>&1 >/dev/null && rm index.html && ls -lh | awk '/game/' | awk '{print $5}'",
+    "build": "webpack --mode='production' && cd dist && rm main.js && advzip -a game.zip $(ls) 2>&1 >/dev/null && rm index.html && ls -lh | awk '/game/' | awk '{print $5}'",
     "test": "test"
   },
   "repository": {

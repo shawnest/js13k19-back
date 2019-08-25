@@ -1,5 +1,6 @@
 body {
-    background: black;
-    height: 800px;
-    width: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  max-height: 100vh;
 }
