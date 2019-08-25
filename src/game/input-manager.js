@@ -5,7 +5,7 @@ class InputManager {
     initKeys();
   }
 
-  onKeyPressed(key, callback) {
+  on(key, callback) {
     bindKeys(key, callback);
   }
 }
