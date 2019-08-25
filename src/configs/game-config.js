@@ -1,8 +1,16 @@
 export const DISPLAY = Object.freeze({
   WIDTH: window.screen.width,
-  HEIGHT: window.screen.height
+  HEIGHT: window.screen.height,
+  DEFAULT_WIDTH: 800,
+  DEFAULT_HEIGHT: 600
 });
 
+export const SCALE_RATIO = Math.min(
+  DISPLAY.WIDTH / DISPLAY.DEFAULT_WIDTH,
+  DISPLAY.HEIGHT / DISPLAY.DEFAULT_HEIGHT
+);
+
 export const GAMEPLAY = Object.freeze({
-  BACKGROUND: "black"
+  BACKGROUND: "black",
+  PLAYER_COLOR: "white"
 });
