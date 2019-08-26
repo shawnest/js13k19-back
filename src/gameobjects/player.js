@@ -1,5 +1,5 @@
 import kontra from "kontra";
-import { SCALE_RATIO, GYRO_SUPPORTED } from "../configs/game-config";
+import { SCALE_RATIO, GAMEPLAY } from "../configs/game-config";
 import degreesToRadian from "../utilities/math";
 import BasicSprite from "./basic";
 
@@ -8,38 +8,24 @@ class Player extends BasicSprite {
     super(properties);
 
     this.setScale(SCALE_RATIO);
-    this.setControls();
-  }
-
-  setControls() {
-    this.controls = null;
-    if (GYRO_SUPPORTED) {
-      window.addEventListener(
-        "deviceorientation",
-        event => {
-          this.event = event;
-        },
-        true
-      );
-      this.controls = () => {
-        if (this.event) {
-          this.rotation = this.event.gamma;
-        }
-      };
-    } else {
-      this.controls = () => {
-        if (kontra.keyPressed("left")) {
-          this.rotation += -2;
-        }
-        if (kontra.keyPressed("right")) {
-          this.rotation += 2;
-        }
-      };
-    }
   }
 
   update() {
-    this.controls();
+    if (kontra.keyPressed("left")) {
+      this.rotation += -2;
+    }
+    if (kontra.keyPressed("right")) {
+      this.rotation += 2;
+    }
+    if (kontra.keyPressed("up")) {
+      this.showFlame = true;
+      if (this.flameTimeout) {
+        clearTimeout(this.flameTimeout);
+      }
+      this.flameTimeout = setTimeout(() => {
+        this.showFlame = false;
+      }, GAMEPLAY.FLAME_TIMEOUT);
+    }
   }
 
   render() {
@@ -57,8 +43,19 @@ class Player extends BasicSprite {
     this.context.lineTo(0, -this.height);
     this.context.lineTo(-halfWidth, halfHeight);
     this.context.closePath();
-
     this.context.fill();
+
+    if (this.showFlame) {
+      this.context.beginPath();
+      this.context.fillStyle = GAMEPLAY.FLAME_COLOR;
+      this.context.moveTo(-halfWidth, halfHeight);
+      this.context.lineTo(halfWidth, halfHeight);
+      this.context.lineTo(0, this.height);
+      this.context.lineTo(-halfWidth, halfHeight);
+      this.context.fill();
+      this.context.closePath();
+    }
+
     this.context.restore();
   }
 }

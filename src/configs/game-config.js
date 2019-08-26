@@ -14,5 +14,7 @@ export const SCALE_RATIO = Math.min(
 
 export const GAMEPLAY = Object.freeze({
   BACKGROUND: "black",
-  PLAYER_COLOR: "white"
+  PLAYER_COLOR: "white",
+  FLAME_COLOR: "yellow",
+  FLAME_TIMEOUT: 300
 });
