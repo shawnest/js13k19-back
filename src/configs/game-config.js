@@ -18,3 +18,10 @@ export const GAMEPLAY = Object.freeze({
   FLAME_COLOR: "yellow",
   FLAME_TIMEOUT: 300
 });
+
+export const PHYSICS = Object.freeze({
+  GRAVITY_FORCE: 0.00134,
+  ACCELERATION_FORCE: 0.002,
+  MAGNITUDE_MAX: 0.5,
+  STOPPING_FORCE: 0.95
+});

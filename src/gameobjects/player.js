@@ -1,5 +1,5 @@
 import kontra from "kontra";
-import { SCALE_RATIO, GAMEPLAY } from "../configs/game-config";
+import { SCALE_RATIO, GAMEPLAY, PHYSICS } from "../configs/game-config";
 import degreesToRadian from "../utilities/math";
 import BasicSprite from "./basic";
 
@@ -11,6 +11,19 @@ class Player extends BasicSprite {
   }
 
   update() {
+    super.update();
+    this.handlePhysics();
+    this.handleControls();
+    this.advance();
+  }
+
+  handlePhysics() {
+    this.dy += PHYSICS.GRAVITY_FORCE;
+    this.ddx = 0;
+    this.ddy = 0;
+  }
+
+  handleControls() {
     if (kontra.keyPressed("left")) {
       this.rotation += -2;
     }
@@ -19,12 +32,26 @@ class Player extends BasicSprite {
     }
     if (kontra.keyPressed("up")) {
       this.showFlame = true;
+      this.handleAcceleration();
       if (this.flameTimeout) {
         clearTimeout(this.flameTimeout);
       }
       this.flameTimeout = setTimeout(() => {
         this.showFlame = false;
       }, GAMEPLAY.FLAME_TIMEOUT);
+    }
+  }
+
+  handleAcceleration() {
+    const cos = Math.cos(degreesToRadian(this.rotation));
+    const sin = Math.sin(degreesToRadian(this.rotation));
+    this.ddx = sin * PHYSICS.ACCELERATION_FORCE;
+    this.ddy = cos * -PHYSICS.ACCELERATION_FORCE;
+
+    const magnitude = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+    if (magnitude > PHYSICS.MAGNITUDE_MAX && cos > 0) {
+      this.dx *= PHYSICS.STOPPING_FORCE;
+      this.dy *= PHYSICS.STOPPING_FORCE;
     }
   }
 
